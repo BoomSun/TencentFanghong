@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>请使用浏览器打开</title>
-    <style type="text/css">
+ <head> 
+  <meta charset="UTF-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <title>请使用浏览器打开 - 勿埋我心</title> 
+  <style type="text/css">
         .loader {
             width: 320px;
             margin: 50px auto 70px;
@@ -13,7 +13,7 @@
             margin-top: 180px;
         }
         .loader .loading-1 {
-            margin: 0px auto;
+            margin:0px auto;
             position: relative;
             width: 70%;
             height: 10px;
@@ -38,7 +38,7 @@
             color: #69d2e7;
             font-size: 22px;
             text-align: center;
-            animation: bounce 2s linear infinite;
+            animation: bounce 2s  linear infinite;
         }
         @keyframes load {
             0% {
@@ -60,7 +60,7 @@
             }
         }
         @keyframes bounce {
-            0%, 100% {
+            0%,100% {
                 top: 10px;
             }
             12.5% {
@@ -68,90 +68,69 @@
             }
         }
 
-        .top-bar-guidance {
-            font-size: 15px;
-            color: #fff;
-            height: 70%;
-            line-height: 1.8;
-            padding-left: 20px;
-            padding-top: 20px;
-            background: url(https://img.alicdn.com/imgextra/i3/2200638895580/O1CN01awiCFw1r5gfyRJf65_!!2200638895580.png) center top/contain no-repeat;
-        }
-        body, html {
-            width: 100%;
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-        body {
-            background-color: #fff;
-        }
-        .app-download-btn {
-            display: block;
-            width: 214px;
-            height: 40px;
-            line-height: 40px;
-            margin: 18px auto 0 auto;
-            text-align: center;
-            font-size: 18px;
-            color: #2466f4;
-            border-radius: 20px;
-            border: .5px #2466f4 solid;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="top-bar-guidance">
-        <div class="htmleaf-container">
-            <header class="htmleaf-header"></header>
-            <div class="demo">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="loader">
-                                <a style="display: none;" href="" id="vurl" rel="noreferrer"></a>
-                                <div class="loading-1"></div>
-                                <div class="loading-2">
-                                    因QQ/微信自带浏览器不支持本网站
-                                    <br />请点击右上角使用其他浏览器
-                                    <br />
-                                    <a style="display: none;" href="" id="vurl" rel="noreferrer"></a> 
-<a href="#" class="app-download-btn" id="browserLink">点击打开浏览器</a>
-                                </div>
-                                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
+        .top-bar-guidance{font-size:15px;color:#fff;height:70%;line-height:1.8;padding-left:20px;padding-top:20px;background:url(https://img.alicdn.com/imgextra/i3/2200638895580/O1CN01awiCFw1r5gfyRJf65_!!2200638895580.png) center top/contain no-repeat}
+        body,html{width:100%;height:100%;margin:0px;padding:0px}
+        body{background-color:#fff}
+        .app-download-btn{display:block;width:214px;height:40px;line-height:40px;margin:18px auto 0 auto;text-align:center;font-size:18px;color:#2466f4;border-radius:20px;border:.5px #2466f4 solid;text-decoration:none}
+  </style> 
+ </head> 
+ <body> 
+  <div class="top-bar-guidance"> 
+   <div class="htmleaf-container"> 
+    <header class="htmleaf-header"> 
+    </header> 
+    <div class="demo"> 
+     <div class="container"> 
+      <div class="row"> 
+       <div class="col-md-12"> 
+        <div class="loader"> 
+         <a style="display: none;" href="" id="vurl" rel="noreferrer"></a> 
+         <div class="loading-1"></div> 
+         <div class="loading-2">
+          因QQ/微信自带浏览器不支持本网站
+          <br />请点击右上角使用其他浏览器 
+          <br /> 
+          <a href="#" class="app-download-btn" id="browserLink">点击打开浏览器</a>
+          <a href="https://www.skyqian.com" class="app-download-btn">勿埋我心</a>
+         </div> 
+         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+         <script>
 function openu(u){
     document.getElementById("vurl").href= u;
     document.getElementById("vurl").click();
 }
 
 $(document).ready(function () {
-    var url = window.location.href;
-    $.getJSON("https://boomsun.github.io/TencentFanghong/api/?url=" + encodeURIComponent(url), function (data) {
-        var siteurl = data.url;  // 从API获取处理后的URL
-        
-        // 更新“点击打开浏览器”按钮的链接
-        $("#browserLink").attr("href", "mttbrowser://" + siteurl);
-        
-        // 针对QQ/微信浏览器的跳转处理
-        if (navigator.userAgent.indexOf("QQ/") > -1 || navigator.userAgent.indexOf("MicroMessenger") > -1) {
-            openu("mttbrowser://url=" + siteurl);
-            
-            // 监听点击事件，强制跳转
+    var siteurl = window.location.href;
+
+    // 检查用户代理是否是QQ浏览器或微信
+    var isQQ = navigator.userAgent.indexOf("QQ/") > -1;
+    var isWeChat = navigator.userAgent.indexOf("MicroMessenger") > -1;
+
+    if (isQQ || isWeChat) {
+        var targetUrl = "mttbrowser://url=" + siteurl;
+
+        // 设置按钮的点击链接
+        $("#browserLink").attr("href", targetUrl);
+
+        // 如果是QQ浏览器，自动尝试跳转
+        if (isQQ) {
+            openu(targetUrl);
+
+            // 当页面被点击时，强制跳转
             $("html").on("click", function () {
-                openu("mttbrowser://url=" + siteurl);
+                openu(targetUrl);
             });
         }
-    });
+    }
 });
-</script>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+         </script> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div>   
+ </body>
 </html>
