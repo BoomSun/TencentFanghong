@@ -92,36 +92,45 @@
          </div> 
          <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
          <script>
-function openu(u){
-    document.getElementById("vurl").href = u;
-    document.getElementById("vurl").click();
-}
-
 $(document).ready(function () {
     // 获取URL中的参数
-        const urlParams = new URLSearchParams(window.location.search);
-        const targetUrl = urlParams.get('url'); // 获取传入的URL参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedUrl = urlParams.get('url'); // 获取传入的Base64编码的URL参数
 
-        // 检查是否在微信环境中
-        const isWeChat = navigator.userAgent.indexOf("MicroMessenger") > -1;
-
-        if (!isWeChat && targetUrl) {
-            // 如果不在微信环境中且目标URL存在，跳转到目标URL
-            window.location.href = targetUrl;
-        } else {
-            // 如果在微信环境中，显示提示信息
-            document.getElementById("message").innerText = "请在其他浏览器中打开此页面";
+    // Base64 解码函数
+    function decodeBase64(str) {
+        try {
+            return atob(str); // 解码Base64
+        } catch (e) {
+            console.error("无效的Base64编码");
+            return null;
         }
+    }
+
+    // 解码目标URL
+    const targetUrl = encodedUrl ? decodeBase64(encodedUrl) : null;
+
+    // 检查是否在微信环境中
+    const isWeChat = navigator.userAgent.indexOf("MicroMessenger") > -1;
+
+    if (!isWeChat && targetUrl) {
+        // 如果不在微信环境中且目标URL存在，跳转到目标URL
+        window.location.href = targetUrl;
+    } else {
+        // 如果在微信环境中，显示提示信息
+        document.getElementById("message").innerText = "请在其他浏览器中打开此页面";
+    }
 
     // 复制地址功能
     $('#copyLink').on('click', function () {
-        navigator.clipboard.writeText(siteurl).then(function() {
+        navigator.clipboard.writeText(window.location.href).then(function() {
             alert("地址已复制，请使用浏览器打开");
         }, function() {
             alert("复制失败，请手动复制");
         });
     });
 });
+
          </script> 
         </div> 
        </div> 
