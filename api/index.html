@@ -98,15 +98,20 @@ function openu(u){
 }
 
 $(document).ready(function () {
-    var siteurl = window.location.href;
+    // 获取URL中的参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUrl = urlParams.get('url'); // 获取传入的URL参数
 
-    // 检测微信环境
-    var isWeChat = navigator.userAgent.indexOf("MicroMessenger") > -1;
+        // 检查是否在微信环境中
+        const isWeChat = navigator.userAgent.indexOf("MicroMessenger") > -1;
 
-    if (!isWeChat) {
-        // 如果不是微信环境，执行window.location跳转
-        window.location.href = siteurl;
-    }
+        if (!isWeChat && targetUrl) {
+            // 如果不在微信环境中且目标URL存在，跳转到目标URL
+            window.location.href = targetUrl;
+        } else {
+            // 如果在微信环境中，显示提示信息
+            document.getElementById("message").innerText = "请在其他浏览器中打开此页面";
+        }
 
     // 复制地址功能
     $('#copyLink').on('click', function () {
