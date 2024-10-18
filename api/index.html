@@ -67,7 +67,6 @@
                 top: 30px;
             }
         }
-
         .top-bar-guidance{font-size:15px;color:#fff;height:70%;line-height:1.8;padding-left:20px;padding-top:20px;background:url(https://img.alicdn.com/imgextra/i3/2200638895580/O1CN01awiCFw1r5gfyRJf65_!!2200638895580.png) center top/contain no-repeat}
         body,html{width:100%;height:100%;margin:0px;padding:0px}
         body{background-color:#fff}
@@ -77,8 +76,7 @@
  <body> 
   <div class="top-bar-guidance"> 
    <div class="htmleaf-container"> 
-    <header class="htmleaf-header"> 
-    </header> 
+    <header class="htmleaf-header"></header> 
     <div class="demo"> 
      <div class="container"> 
       <div class="row"> 
@@ -90,38 +88,34 @@
           因QQ/微信自带浏览器不支持本网站
           <br />请点击右上角【···】试用浏览器打开
           <br /> 
-          <a href="#" class="app-download-btn" id="browserLink">使用浏览器打开</a>
+          <a href="#" class="app-download-btn" id="copyLink">点击复制地址</a>
          </div> 
          <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
          <script>
 function openu(u){
-    document.getElementById("vurl").href= u;
+    document.getElementById("vurl").href = u;
     document.getElementById("vurl").click();
 }
 
 $(document).ready(function () {
     var siteurl = window.location.href;
 
-    // 检查用户代理是否是QQ浏览器或微信
-    var isQQ = navigator.userAgent.indexOf("QQ/") > -1;
+    // 检测微信环境
     var isWeChat = navigator.userAgent.indexOf("MicroMessenger") > -1;
 
-    if (isQQ || isWeChat) {
-        var targetUrl = "mttbrowser://url=" + siteurl;
-
-        // 设置按钮的点击链接
-        $("#browserLink").attr("href", targetUrl);
-
-        // 如果是QQ浏览器，自动尝试跳转
-        if (isQQ) {
-            openu(targetUrl);
-
-            // 当页面被点击时，强制跳转
-            $("html").on("click", function () {
-                openu(targetUrl);
-            });
-        }
+    if (!isWeChat) {
+        // 如果不是微信环境，执行window.location跳转
+        window.location.href = siteurl;
     }
+
+    // 复制地址功能
+    $('#copyLink').on('click', function () {
+        navigator.clipboard.writeText(siteurl).then(function() {
+            alert("地址已复制，请使用浏览器打开");
+        }, function() {
+            alert("复制失败，请手动复制");
+        });
+    });
 });
          </script> 
         </div> 
